@@ -1,3 +1,4 @@
+import os
 
 def cast(destclass, obj):
     cdef JavaClass jc
@@ -17,6 +18,8 @@ def find_javaclass(bytes name):
     cdef JNIEnv *j_env = get_jnienv()
 
     name = name.replace('.', '/')
+
+    print 'CLASSPATH:', os.environ['CLASSPATH']
 
     jc = j_env[0].FindClass(j_env, name)
     if jc == NULL:

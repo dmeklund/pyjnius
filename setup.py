@@ -46,10 +46,15 @@ if platform == 'android':
 elif platform == 'darwin':
     import objc
     framework = objc.pathForFramework('JavaVM.framework')
+    print framework
+    import ipdb; ipdb.set_trace()
     if not framework:
         raise Exception('You must install Java on your Mac OS X distro')
-    extra_link_args = ['-framework', 'JavaVM']
-    include_dirs = [join(framework, 'Versions/A/Headers')]
+    # extra_link_args = ['-framework', 'JavaVM']
+    # include_dirs = [join(framework, 'Versions/A/Headers')]
+    extra_link_args = ['-ljvm', '-L/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk//Contents/Home/jre/lib/server/']
+    include_dirs = ['/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/include/',
+                    '/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/include/darwin/']
 else:
     import subprocess
     # otherwise, we need to search the JDK_HOME

@@ -30,6 +30,7 @@ cdef void create_jnienv() except *:
 
     options = <JavaVMOption*>malloc(sizeof(JavaVMOption) * len(optarr))
     for i, opt in enumerate(optarr):
+        print "option:", opt
         options[i].optionString = <bytes>(opt)
         options[i].extraInfo = NULL
 
@@ -37,6 +38,9 @@ cdef void create_jnienv() except *:
     args.options = options
     args.nOptions = len(optarr)
     args.ignoreUnrecognized = JNI_FALSE
+
+    print 'number of options:', len(optarr)
+    print 'options:', optarr
 
     ret = JNI_CreateJavaVM(&jvm, <void **>&_platform_default_env, &args)
     free(options)
