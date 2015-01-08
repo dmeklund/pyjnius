@@ -47,7 +47,6 @@ elif platform == 'darwin':
     import objc
     framework = objc.pathForFramework('JavaVM.framework')
     print framework
-    import ipdb; ipdb.set_trace()
     if not framework:
         raise Exception('You must install Java on your Mac OS X distro')
     # extra_link_args = ['-framework', 'JavaVM']
